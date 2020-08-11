@@ -1,0 +1,9 @@
+{
+  "name": "types",
+  "version": "1.0.0",
+  "description": "Utility types to extends TypeScript capabilities",
+  "main": "index.d.ts",
+  "repository": "https://github.io/squall-io/types",
+  "author": "Salathiel Genese <salathiel@genese.name>",
+  "license": "MIT"
+}
