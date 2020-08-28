@@ -9,6 +9,7 @@
 **/*.jsx
 **/*.tsx
 **/*.d.ts
+!/.postbuild.js
 
 *.log
 *.error
