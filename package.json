@@ -6,7 +6,12 @@
   "repository": "https://github.io/squall-io/types",
   "author": "Salathiel Genese <salathiel@genese.name>",
   "license": "MIT",
+  "types": "./index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
-    "typescript": "^3.9.7"
+    "nodemon": "^2.0.4",
+    "typescript": "^4.0.2"
   }
 }

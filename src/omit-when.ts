@@ -1,0 +1,1 @@
+type OmitWhen<T, V = any, K extends KeyOf<T> = KeyOf<T>> = T extends any ? Omit<T, K & KeyOf<T, V>> : never;

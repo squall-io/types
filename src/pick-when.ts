@@ -1,0 +1,1 @@
+type PickWhen<T, V = any, K extends KeyOf<T> = KeyOf<T>> = T extends any ? Pick<T, K & KeyOf<T, V>> : never;

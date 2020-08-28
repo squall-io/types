@@ -4,3 +4,11 @@
 
 /node_modules
 /*.env
+
+**/*.js
+**/*.jsx
+**/*.tsx
+**/*.d.ts
+
+*.log
+*.error
