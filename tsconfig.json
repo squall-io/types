@@ -2,6 +2,7 @@
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "emitDeclarationOnly": true,
+    "moduleResolution": "Node",
     "esModuleInterop": true,
     "outFile": "./index.js",
     "skipLibCheck": true,
@@ -9,5 +10,9 @@
     "rootDir": "./src",
     "target": "es2015",
     "strict": true
-  }
+  },
+  "exclude": [
+    "build.ts",
+    "**/*.d.ts"
+  ]
 }
