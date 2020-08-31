@@ -1,7 +1,7 @@
-// @ts-ignore
-import replaceInFiles from 'replace-in-files';
 import { spawnSync } from 'child_process';
 import { readFileSync } from 'fs';
+// @ts-ignore
+import replaceInFiles from 'replace-in-files';
 import * as ts from 'typescript';
 
 
@@ -37,17 +37,21 @@ import * as ts from 'typescript';
     ts.forEachChild( sourceFile, node => {
         const triviaWidth = node.getLeadingTriviaWidth( sourceFile );
         const trivial = sourceFile.text.substr( node.pos, triviaWidth )
-            .replace( /^\s*\/\*[\s*]*(.*)$/gm, '$1' )
-            .replace( /(.*)[\t *]*\/\s*$/gm, '$1' )
-            .replace( /^([\t *]*\*[\t *]*)?(.*)/gm, '$2' )
-            .replace( /^\s*(.*)\s*$/, '$1' );
+            // Remove leading multiline comments
+            .replace(/^(?:\s*\/[ \t*]+)\r?\n?(.*)$/gm, '$1')
+            // Remove trailing multiline comments
+            .replace(/^(.*)\r?\n?[ \t*]*\*\/(?:\r?\n?)*$/gm, '$1')
+            // Remove eventual leading whitespaces and asterisk at line beginning
+            .replace(/^(\r?\n)?[ \t]*\**[ \t]*(.*)/gm, '$1$2')
+            // Remove trailing whitespaces at line ends
+            .replace(/^(.*)[ \t]*(\r?\n?)*$/g, '$1$2')
 
         trivial.trim() && documents.push( trivial );
     } );
     await replaceInFiles( {
         files: `${ __dirname }/README.md`,
         from: /(<!-- WhatIsIn:start -->(\s|.)*<!-- WhatIsIn:end -->)/gm,
-        to: `<!-- WhatIsIn:start -->${documents.join('\n\n')}<!-- WhatIsIn:end -->`,
+        to: `<!-- WhatIsIn:start -->\r\n${ documents.sort().join( '\n\n' ) }\r\n<!-- WhatIsIn:end -->`,
     } );
 })().catch( error => {
     console.error( error );
