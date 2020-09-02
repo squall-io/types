@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "Utility types to extends TypeScript capabilities",
   "main": "index.d.ts",
-  "repository": "https://github.io/squall-io/types",
+  "repository": "https://github.com/squall-io/types",
   "author": "Salathiel Genese <salathiel@genese.name>",
   "license": "MIT",
   "types": "./index.d.ts",
