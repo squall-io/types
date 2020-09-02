@@ -22,6 +22,8 @@ Having those types in a separate package and made them widely available would ha
 - We no more need to crack our head to craft some types
 - We don't have to maintain those type ourselves, per project
 
+> Note: We do care to keep your properties modifiers, like _optional_ and _readonly_. 
+
 # What's In?
 
 <!-- WhatIsIn:start -->
