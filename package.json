@@ -8,6 +8,7 @@
   "license": "MIT",
   "types": "./index.d.ts",
   "scripts": {
+    "prepack": "ts-node build.ts",
     "build": "ts-node build.ts",
     "dev:build": "nodemon --exec 'ts-node build.ts'"
   },
