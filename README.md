@@ -26,6 +26,44 @@ Having those types in a separate package and made them widely available would ha
 
 <!-- WhatIsIn:start -->
 
+`KeyOf<U, V ?= any>`
+
+
+For every member of the union `U`, return its keys that map to `V`.
+
+
+`OmitWhen<U, V ?= any, K ?= KeyOf<U, V>>`
+
+For every member of the union `U`, omit its keys `K` for those keys which map to `V`.
+
+
+`OptionalKeys<U, V ?= any>`
+
+
+For every member of the union `U`, return the optional keys that map to `V`.
+
+
+`PickWhen<U, V ?= any, K ?= KeyOf<U, V>>`
+
+For every member of the union `U`, pick its keys `K` for those keys which map to `V`.
+
+
+`RequiredKeys<U, V ?= any>`
+
+
+For every member of the Union `U`, returns the required keys that map to `V`.
+
+
+`UnionToIntersection<U>`
+
+
+Merge distinct members of the union `U` into a single type.
+
+
+`ValueOf<U>`
+
+
+For every member of the union `U`, return the value types to which its keys map.
 <!-- WhatIsIn:end -->
 
 # Contributors
