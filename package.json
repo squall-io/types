@@ -8,9 +8,9 @@
   "license": "MIT",
   "types": "./index.d.ts",
   "scripts": {
-    "prepack": "ts-node build.ts",
+    "prepack": "yarpm build",
     "build": "ts-node build.ts",
-    "dev:build": "nodemon --exec 'ts-node build.ts'"
+    "dev:build": "nodemon --exec 'yarpm build'"
   },
   "nodemonConfig": {
     "ext": "ts",
