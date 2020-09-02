@@ -3,7 +3,7 @@ Utility types to extends TypeScript capabilities.
 
 # Why?
 
-TypeScript philosophy is not to add more utility type: it divides the community.
+TypeScript team's philosophy is not to add more utility type: it divides the community.
 
 > We have decided to not add any additional utility types unless they are needed for declaration emit.
 > Every time we add a new utility type, there are ~four different forms to choose from, people split
@@ -24,7 +24,9 @@ Having those types in a separate package and made them widely available would ha
 
 # What's In?
 
-<!-- WhatIsIn:start --><!-- WhatIsIn:end -->
+<!-- WhatIsIn:start -->
+
+<!-- WhatIsIn:end -->
 
 # Contributors
 
