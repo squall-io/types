@@ -27,45 +27,153 @@ Having those types in a separate package and made them widely available would ha
 # What's In?
 
 <!-- WhatIsIn:start -->
-
-`KeyOf<U, V ?= any>`
-
+### `KeyOf<U, V ?= any>`
 
 For every member of the union `U`, return its keys that map to `V`.
 
+**Union distribution**
 
-`OmitWhen<U, V ?= any, K ?= KeyOf<U, V>>`
+```typescript
+type Union = { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' };
 
-For every member of the union `U`, omit its keys `K` for those keys which map to `V`.
+type Result = keyof Union;       // never
+type ThisResult = KeyOf<Union>;  // 0 | "a" | "A" | 1
+```
 
+**Filter keys mapping to a type**
 
-`OptionalKeys<U, V ?= any>`
+```typescript
+type Union = { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' };
 
+// TypeScript | Not Applicable
+type ThisResult = KeyOf<Union, 'A'>; // "A" | 1
+```
+
+### `OmitWhen<U, V ?= any, K ?= KeyOf<U, V>>`
+
+For every member of the union `U`, remove its keys `K` when those keys map to `V`.
+
+**Union distribution**
+
+```typescript
+type Union = { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' };
+
+type Result = Omit<Union, 'a'>;              // {}
+type ThisResult = OmitWhen<Union, any, 'a'>; // { readonly A?: 'A' }
+```
+
+**Remove keys mapping to a type**
+
+```typescript
+type Union = { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' };
+
+// TypeScript | Not Applicable
+type ThisResult = OmitWhen<Union, 'a'>;  // { readonly A?: 'A' } | { 1?: 'A' }
+```
+
+### `OptionalKeys<U, V ?= any>`
 
 For every member of the union `U`, return the optional keys that map to `V`.
 
+```typescript
+type Letter = { a: 'a', readonly A?: 'A' };
 
-`PickWhen<U, V ?= any, K ?= KeyOf<U, V>>`
+// TypeScript | Not Applicable
+type ThisResult = OptionalKeys<Letter>;  // "A"
+```
 
-For every member of the union `U`, pick its keys `K` for those keys which map to `V`.
+**Union distribution**
 
+```typescript
+type Input = { a: 'a', readonly A?: 'A' }  | { 0: 'a', 1?: 'A' };
 
-`RequiredKeys<U, V ?= any>`
+// TypeScript | Not Applicable
+type ThisResult = OptionalKeys<Input>;   // "A" | 1
+```
+
+**Retain optional keys mapping to a type**
+
+```typescript
+type Input = { a: 'a', readonly A: 'A' }  | { 0: 'a', 1?: 'A' };
+
+// TypeScript | Not Applicable
+type ThisResult = OptionalKeys<Input, 'A'>;  // 1
+```
+
+### `PickWhen<U, V ?= any, K ?= KeyOf<U, V>>`
+
+For every member of the union `U`, retain its keys `K` when those keys which map to `V`.
+
+**Union distribution**
+
+```typescript
+type Union = { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' };
+
+type Result = Pick<Union, 'A'>;              // Error: Type 'string' does not satisfy the constraint 'never'.
+type ThisResult = PickWhen<Union, any, 'A'>; // { readonly A?: 'A' } | {}
+```
+
+**Retain keys mapping to a type**
+
+```typescript
+type Union = { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' };
+
+// TypeScript | Not Applicable
+type ThisResult = PickWhen<Union, 'A'>;  // { readonly A?: 'A' } | { 1?: 'A' }
+```
+
+### `RequiredKeys<U, V ?= any>`
 
 
 For every member of the Union `U`, returns the required keys that map to `V`.
 
+```typescript
+type Letter = { a: 'a', readonly A?: 'A' };
 
-`UnionToIntersection<U>`
+// TypeScript | Not Applicable
+type ThisResult = RequiredKeys<Letter>;  // "a"
+```
+
+**Union distribution**
+
+```typescript
+type Input = { a: 'a', readonly A?: 'A' }  | { 0: 'a', 1?: 'A' };
+
+// TypeScript | Not Applicable
+type ThisResult = RequiredKeys<Input>;   // "a" | 0
+```
+
+**Retain required keys mapping to a type**
+
+```typescript
+type Input = { a: 'a', readonly A: 'A' }  | { 0: 'a', 1?: 'A' };
+
+// TypeScript | Not Applicable
+type ThisResult = RequiredKeys<Input, 'A'>;  // 1
+```
+
+### `UnionToIntersection<U>`
 
 
 Merge distinct members of the union `U` into a single type.
 
+```typescript
+type Input = { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' };
 
-`ValueOf<U>`
+// TypeScript | Not Applicable
+type ThisResult = UnionToIntersection<Input>;    // { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' }
+```
 
+### `ValueOf<U>`
 
 For every member of the union `U`, return the value types to which its keys map.
+
+```typescript
+type Union = { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' };
+
+type Result = Union[keyof Union];    // never
+type ThisResult = ValueOf<Union>;    // "a" | "A" | undefined
+```
 <!-- WhatIsIn:end -->
 
 # Contributors
