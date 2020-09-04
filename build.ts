@@ -35,7 +35,7 @@ async function extractDocumentation (): Promise<void> {
             // Remove trailing multiline comments
             .replace( /^(.*)\r?\n?[ \t*]*\*\/(?:\r?\n?)*$/gm, '$1' )
             // Remove eventual leading whitespaces and asterisk at line beginning
-            .replace( /^(\r?\n)?[ \t]*\**[ \t]*(.*)/gm, '$1$2' )
+            .replace( /^(\r?\n)?[ \t]*\** ?(.*)/gm, '$1$2' )
             // Remove trailing whitespaces at line ends
             .replace( /^(.*)[ \t]*(\r?\n?)*$/g, '$1$2' )
             // Set type description an H3 heading
