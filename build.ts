@@ -41,7 +41,6 @@ async function extractDocumentation (): Promise<void> {
             // Set type description an H3 heading
             .replace( /^\s*(`[^`])(.*)/m, '### $1$2' );
 
-        console.log(trivial);
         trivial.trim() && documents.push( trivial );
     } );
     await replaceInFiles( {
