@@ -8,8 +8,8 @@
   "license": "MIT",
   "types": "./index.d.ts",
   "scripts": {
-    "prepack": "yarpm build",
     "build": "ts-node build.ts",
+    "prepack": "yarpm run build",
     "dev:build": "nodemon --exec 'yarpm build'"
   },
   "nodemonConfig": {
