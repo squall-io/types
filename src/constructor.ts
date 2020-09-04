@@ -25,7 +25,7 @@
  * }
  *
  * // Error: Type "string" is not assignable to type "number"
- * const MarsCoordinate: CoordinateConstructor = class {
+ * const NeptuneCoordinate: CoordinateConstructor = class {
  *     public longitude!: number;
  *     public latitude!: number;
  *
