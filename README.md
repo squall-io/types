@@ -161,7 +161,7 @@ Merge distinct members of the union `U` into a single type.
 type Input = { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' };
 
 // TypeScript | Not Applicable
-type ThisResult = UnionToIntersection<Input>;    // { a: 'a', readonly A?: 'A' } | { 0: 'a', 1?: 'A' }
+type ThisResult = UnionToIntersection<Input>;    // { a: 'a', readonly A?: 'A' } & { 0: 'a', 1?: 'A' }
 ```
 
 ### `ValueOf<U>`
