@@ -1,6 +1,6 @@
 {
   "name": "@squall.io/types",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Utility types to extends TypeScript capabilities",
   "main": "index.d.ts",
   "repository": "https://github.com/squall-io/types",
