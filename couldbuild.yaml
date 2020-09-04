@@ -1,0 +1,15 @@
+steps:
+  - id: install-dependencies
+    entrypoint: yarn
+    name: node
+    args:
+      - install
+      - --verbose
+  - id: publish-to-registry
+    entrypoint: npm
+    name: node
+    args:
+      - publish
+options:
+  secretEnv:
+    - NPM_TOKEN
