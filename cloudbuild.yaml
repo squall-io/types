@@ -4,26 +4,10 @@ steps:
     entrypoint: bash
     args:
       - -c
-      - |
-        NPM_TOKEN="$( gcloud secrets versions access latest --secret=NPM_TOKEN )" &&
-        echo $NPM_TOKEN &&
-        echo "NPM_TOKEN=${NPM_TOKEN}" > /workspace/.env &&
-        cat /workspace/.env
-  - id: install-dependencies
-    args: [ 'install' ]
-    name: node:alpine
-    entrypoint: yarn
-  - id: build-package-dist
-    args: [ 'build' ]
-    name: node:alpine
-    entrypoint: yarn
-  - id: publish-to-registry
+      - echo "_auth=$( gcloud secrets versions access latest --secret=NPM_TOKEN --format='get(payload.data)' | tr '_-' '/+' | base64 -d )" >> .npmrc
+  - id: install-dependencies-and-publish-package
     name: node:alpine
     entrypoint: sh
     args:
-    - -c
-    - |
-      cat /workspace/.env &&
-      source /workspace/.env &&
-      env &&
-      npm publish
+      - -c
+      - yarn install && npm publish --access public
