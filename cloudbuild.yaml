@@ -1,13 +1,12 @@
 steps:
-  - id: fecth-npm-token-from-secret-manager
-    name: gcr.io/cloud-builders/gcloud
+  - name: gcr.io/cloud-builders/gcloud
     entrypoint: bash
     args:
       - -c
-      - echo "_auth=$( gcloud secrets versions access latest --secret=NPM_TOKEN --format='get(payload.data)' | tr '_-' '/+' | base64 -d )" >> .npmrc
-  - id: install-dependencies-and-publish-package
-    name: node:alpine
+      - echo "//registry.npmjs.org/:_authToken=$( gcloud secrets versions access latest --secret=NPM_TOKEN --format='get(payload.data)' | tr '_-' '/+' | base64 -d )" >> .npmrc
+  - name: node:alpine
     entrypoint: sh
     args:
       - -c
-      - yarn install && npm publish --access public
+      - yarn install &&
+        npm publish --access public
