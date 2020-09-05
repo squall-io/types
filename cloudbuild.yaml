@@ -4,9 +4,8 @@ steps:
     args:
       - -c
       - echo "//registry.npmjs.org/:_authToken=$( gcloud secrets versions access latest --secret=NPM_TOKEN --format='get(payload.data)' | tr '_-' '/+' | base64 -d )" >> .npmrc
-  - name: node:alpine
+  - name: node:alpine # NOTE: ts-node is quite specific on node version
     entrypoint: sh
     args:
       - -c
-      - yarn install &&
-        npm publish --access public
+      - yarn install && npm publish
